@@ -20,7 +20,11 @@ const io = new Server(server, {
   }
 });
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: "*", // ya agar sirf Netlify allow karna hai to:
+  // origin: "https://iridescent-lolly-f900c3.netlify.app"
+}));
 app.use(express.json());
 app.use('/recordings', express.static(path.join(__dirname, 'recordings')));
 
