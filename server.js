@@ -12,6 +12,19 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+// Ensure recordings folder + index.json exists
+const recordingsDir = path.join(__dirname, 'recordings');
+if (!fs.existsSync(recordingsDir)) {
+  fs.mkdirSync(recordingsDir);
+}
+
+const indexPath = path.join(recordingsDir, 'index.json');
+if (!fs.existsSync(indexPath)) {
+  fs.writeFileSync(indexPath, '[]');
+}
+
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
